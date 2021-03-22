@@ -190,7 +190,7 @@ services:
     networks:
       - devnet
     volumes:
-      - ./scripts/waitForContainers.sh:/var/www/data-portal/waitForCo # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
+      - ./scripts/waitForContainers.sh:/var/www/data-portal/waitForContainers.sh
       - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/gitops.json:/data-portal/data/config/gitops.json
       # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
       - ./Secrets/gitops-logo.png:/data-portal/custom/logo/gitops-logo.png
