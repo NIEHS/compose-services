@@ -263,7 +263,7 @@ services:
     volumes:
       - ./Secrets/etl_creds.json:/usr/share/gen3/tube/creds.json
       #- ./Secrets/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/gitops.json/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
+      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
       - ./Secrets/user.yaml:/usr/share/gen3/tube/user.yaml
     depends_on:
       - postgres
