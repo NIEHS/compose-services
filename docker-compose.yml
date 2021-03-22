@@ -185,12 +185,14 @@ services:
   portal-service:
     image: "quay.io/cdis/data-portal:2020.09"
     container_name: portal-service
+    # command: tail -f /dev/null
     command: ["bash", "/var/www/data-portal/waitForContainers.sh"]
     networks:
       - devnet
     volumes:
-      - ./scripts/waitForContainers.sh:/var/www/data-portal/waitForContainers.sh
-      - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
+      - ./scripts/waitForContainers.sh:/var/www/data-portal/waitForCo # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
+      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/gitops.json:/data-portal/data/config/gitops.json
+      # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
       - ./Secrets/gitops-logo.png:/data-portal/custom/logo/gitops-logo.png
       - ./Secrets/gitops.png:/data-portal/custom/createdby/gitops.png
     environment:
@@ -260,7 +262,8 @@ services:
       - HADOOP_HOST=spark-service
     volumes:
       - ./Secrets/etl_creds.json:/usr/share/gen3/tube/creds.json
-      - ./Secrets/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
+      #- ./Secrets/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
+      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/gitops.json/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
       - ./Secrets/user.yaml:/usr/share/gen3/tube/user.yaml
     depends_on:
       - postgres
