@@ -137,7 +137,8 @@ services:
     networks:
       - devnet
     volumes:
-      - ./Secrets/guppy_config.json:/guppy/guppy_config.json
+      #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
+      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/guppy_config.json:/guppy/guppy_config.json
     environment:
       - GUPPY_CONFIG_FILEPATH=/guppy/guppy_config.json
       - GEN3_ARBORIST_ENDPOINT=http://arborist-service
