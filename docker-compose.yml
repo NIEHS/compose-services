@@ -252,13 +252,15 @@ services:
       - portal-service
       - pidgin-service
   tube-service:
-    image: "quay.io/cdis/tube:2020.09"
+    #image: "quay.io/cdis/tube:2020.09"
+    image: "michaelconway/tube:latest"
     container_name: tube-service
     command: bash -c "while true; do sleep 5; done"
     networks:
       - devnet
     environment:
-      - DICTIONARY_URL=https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
+      #- DICTIONARY_URL=https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
+      - DICTIONARY_URL=http://revproxy-service/api/v0/submission/getschema
       - ES_URL=esproxy-service
       - ES_INDEX_NAME=etl
       - HADOOP_URL=hdfs://spark-service:9000
