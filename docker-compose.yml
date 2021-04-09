@@ -112,7 +112,7 @@ services:
       - ./Secrets/TLS/service.crt:/usr/local/share/ca-certificates/cdis-ca.crt
       - ./scripts/peregrine_setup.sh:/peregrine_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/schemas:/schemas_dir
+      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
     environment: &env
       # DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
       PATH_TO_SCHEMA_DIR: /schemas_dir
@@ -138,7 +138,7 @@ services:
       - ./Secrets/config_helper.py:/var/www/sheepdog/config_helper.py
       - ./scripts/sheepdog_setup.sh:/sheepdog_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/schemas:/schemas_dir
+      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
     environment: *env
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]
@@ -282,6 +282,7 @@ services:
   tube-service:
     #image: "quay.io/cdis/tube:2020.09"
     #image: "michaelconway/tube:latest"
+    image: "michaelconway/tube:latest"
     image: "quay.io/cdis/tube:2021.03"
     container_name: tube-service
     command: bash -c "while true; do sleep 5; done"
