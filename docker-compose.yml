@@ -109,7 +109,7 @@ services:
       - ./Secrets/TLS/service.crt:/usr/local/share/ca-certificates/cdis-ca.crt
       - ./scripts/peregrine_setup.sh:/peregrine_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
+      - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
     environment: &env
       # DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
       PATH_TO_SCHEMA_DIR: /schemas_dir
@@ -135,7 +135,7 @@ services:
       - ./Secrets/config_helper.py:/var/www/sheepdog/config_helper.py
       - ./scripts/sheepdog_setup.sh:/sheepdog_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
+      - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
     environment: *env
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]
@@ -151,7 +151,7 @@ services:
       - devnet
     volumes:
       #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/guppy_config.json:/guppy/guppy_config.json
+      - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/if_and_etl_customizations/guppy_config.json:/guppy/guppy_config.json
       - ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - ./scripts/wait_for_esproxy.sh:/usr/bin/wait_for_esproxy.sh:ro
     entrypoint: /usr/bin/wait_for_esproxy.sh
@@ -220,7 +220,7 @@ services:
       - devnet
     volumes:
       - ./scripts/waitForContainers.sh:/var/www/data-portal/waitForContainers.sh
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/gitops.json:/data-portal/data/config/gitops.json
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/gitops.json:/data-portal/data/config/gitops.json
       # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
       - ./Secrets/gitops-logo.png:/data-portal/custom/logo/gitops-logo.png
       - ./Secrets/gitops.png:/data-portal/custom/createdby/gitops.png
@@ -295,9 +295,9 @@ services:
     volumes:
       - ./Secrets/etl_creds.json:/usr/share/gen3/tube/creds.json
       #- ./Secrets/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1 /if_and_etl_customizations/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
       - ./Secrets/user.yaml:/usr/share/gen3/tube/user.yaml
-      - /ddn/gs1/commons/infrastructure/dev/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/:/usr/share/gen3/custom
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/:/usr/share/gen3/custom
 
     depends_on:
       - postgres
