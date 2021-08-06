@@ -152,7 +152,7 @@ services:
     volumes:
       #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/if_and_etl_customizations/guppy_config.json:/guppy/guppy_config.json
-      - ./Secrets/guppy_config.json:/guppy/guppy_config.json
+      #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - ./scripts/wait_for_esproxy.sh:/usr/bin/wait_for_esproxy.sh:ro
     entrypoint: /usr/bin/wait_for_esproxy.sh
     command: node --max-http-header-size 16000 dist/server/server.js
