@@ -279,8 +279,8 @@ services:
   tube-service:
     #image: "quay.io/cdis/tube:2020.09"
     #image: "michaelconway/tube:latest"
-    image: "michaelconway/tube:latest"
-    image: "quay.io/cdis/tube:2021.03"
+    image: "michaelconway/tube:phase2"
+    #image: "quay.io/cdis/tube:2021.03"
     container_name: tube-service
     command: bash -c "while true; do sleep 5; done"
     networks:
@@ -295,7 +295,7 @@ services:
     volumes:
       - ./Secrets/etl_creds.json:/usr/share/gen3/tube/creds.json
       #- ./Secrets/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
-      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1 /if_and_etl_customizations/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
       - ./Secrets/user.yaml:/usr/share/gen3/tube/user.yaml
       - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/:/usr/share/gen3/custom
 
@@ -318,18 +318,18 @@ services:
     environment:
       - HADOOP_URL=hdfs://0.0.0.0:9000
       - HADOOP_HOST=0.0.0.0
-  kibana-service:
-    image: docker.elastic.co/kibana/kibana-oss:6.5.4
-    container_name: kibana-service
-    environment:
-      - SERVER_NAME=kibana-service
-      - ELASTICSEARCH_URL=http://esproxy-service:9200
-    ports:
-      - 5601:5601
-    networks:
-      - devnet
-    depends_on:
-      - esproxy-service
+  #kibana-service:
+  #  image: docker.elastic.co/kibana/kibana-oss:6.5.4
+  #  container_name: kibana-service
+  #  environment:
+  #    - SERVER_NAME=kibana-service
+  #    - ELASTICSEARCH_URL=http://esproxy-service:9200
+  #  ports:
+  #    - 5601:5601
+  #  networks:
+  #    - devnet
+  #  depends_on:
+  #    - esproxy-service
 networks:
   devnet:
 volumes:
