@@ -109,7 +109,7 @@ services:
       - ./Secrets/TLS/service.crt:/usr/local/share/ca-certificates/cdis-ca.crt
       - ./scripts/peregrine_setup.sh:/peregrine_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
     environment: &env
       # DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
       PATH_TO_SCHEMA_DIR: /schemas_dir
@@ -135,7 +135,7 @@ services:
       - ./Secrets/config_helper.py:/var/www/sheepdog/config_helper.py
       - ./scripts/sheepdog_setup.sh:/sheepdog_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/gdictionary/schemas:/schemas_dir
     environment: *env
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]
@@ -151,7 +151,7 @@ services:
       - devnet
     volumes:
       #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
-      - /var/althome/gen3/niehs-gen3/data-model-ods/data-model-ods/ver-1.1/if_and_etl_customizations/guppy_config.json:/guppy/guppy_config.json
+      - /var/althome/gen3/niehs-gen3/data-model-ods/ver-1.1/if_and_etl_customizations/guppy_config.json:/guppy/guppy_config.json
       #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - ./scripts/wait_for_esproxy.sh:/usr/bin/wait_for_esproxy.sh:ro
     entrypoint: /usr/bin/wait_for_esproxy.sh
@@ -213,6 +213,8 @@ services:
       - peregrine-service
   portal-service:
     image: "quay.io/cdis/data-portal:2021.03"
+    #image: "michaelconway/data-portal:phase2"
+    #image: "quay.io/cdis/data-portal:latest"
     container_name: portal-service
     # command: tail -f /dev/null
     command: ["bash", "/var/www/data-portal/waitForContainers.sh"]
@@ -250,7 +252,7 @@ services:
     networks:
       - devnet
     environment:
-      - FRAME_ANCESTORS=http://localhost
+      - FRAME_ANCESTORS=http://ehsntplp05.niehs.nih.gov
   revproxy-service:
     image: "quay.io/cdis/nginx:2021.03"
     container_name: revproxy-service
@@ -318,18 +320,18 @@ services:
     environment:
       - HADOOP_URL=hdfs://0.0.0.0:9000
       - HADOOP_HOST=0.0.0.0
-  #kibana-service:
-  #  image: docker.elastic.co/kibana/kibana-oss:6.5.4
-  #  container_name: kibana-service
-  #  environment:
-  #    - SERVER_NAME=kibana-service
-  #    - ELASTICSEARCH_URL=http://esproxy-service:9200
-  #  ports:
-  #    - 5601:5601
-  #  networks:
-  #    - devnet
-  #  depends_on:
-  #    - esproxy-service
+  kibana-service:
+    image: docker.elastic.co/kibana/kibana-oss:6.5.4
+    container_name: kibana-service
+    environment:
+      - SERVER_NAME=kibana-service
+      - ELASTICSEARCH_URL=http://esproxy-service:9200
+    ports:
+      - 5601:5601
+    networks:
+      - devnet
+    depends_on:
+      - esproxy-service
 networks:
   devnet:
 volumes:
