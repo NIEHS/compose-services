@@ -1,9 +1,9 @@
 #!/bin/bash
 # Script to create and re-create es indices and setup guppy
 sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/publication_0
+docker exec esproxy-service curl -X DELETE http://localhost:9200/publication_etl_0
 sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/study_data_0
+docker exec esproxy-service curl -X DELETE http://localhost:9200/publication_file_0
 sleep 2
 docker exec esproxy-service curl -X DELETE http://localhost:9200/etl_0
 sleep 2

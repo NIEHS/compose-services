@@ -95,7 +95,7 @@ authorityKeyIdentifier = keyid:always,issuer:always
       # erase old certs if they exist
       /bin/rm -rf service.key service.crt
       #commonName=${1:-localhost}
-      commonName=ehsntplp05.niehs.nih.gov
+      commonName=ehsntpld06.niehs.nih.gov
       SUBJ="/countryName=US/stateOrProvinceName=IL/localityName=Chicago/organizationName=CDIS/organizationalUnitName=PlanX/commonName=$commonName/emailAddress=cdis@uchicago.edu"
       openssl req -new -x509 -nodes -extensions v3_ca -keyout ca-key.pem \
           -out ca.pem -days 365 -subj $SUBJ $OPTS
