@@ -216,7 +216,7 @@ services:
     #image: "michaelconway/data-portal:phase2"
     #image: "quay.io/cdis/data-portal:latest"
     container_name: portal-service
-    # command: tail -f /dev/null
+    #command: tail -f /dev/null
     command: ["bash", "/var/www/data-portal/waitForContainers.sh"]
     networks:
       - devnet
@@ -320,18 +320,18 @@ services:
     environment:
       - HADOOP_URL=hdfs://0.0.0.0:9000
       - HADOOP_HOST=0.0.0.0
-#  kibana-service:
-#    image: docker.elastic.co/kibana/kibana-oss:6.5.4
-#    container_name: kibana-service
-#    environment:
-#      - SERVER_NAME=kibana-service
-#      - ELASTICSEARCH_URL=http://esproxy-service:9200
-#    ports:
-#      - 5601:5601
-#    networks:
-#      - devnet
-#    depends_on:
-#      - esproxy-service
+  kibana-service:
+    image: docker.elastic.co/kibana/kibana-oss:6.5.4
+    container_name: kibana-service
+    environment:
+      - SERVER_NAME=kibana-service
+      - ELASTICSEARCH_URL=http://esproxy-service:9200
+    ports:
+      - 5601:5601
+    networks:
+      - devnet
+    depends_on:
+      - esproxy-service
 networks:
   devnet:
 volumes:
