@@ -252,7 +252,7 @@ services:
     networks:
       - devnet
     environment:
-      - FRAME_ANCESTORS=http://ehsntpld06.niehs.nih.gov
+      - FRAME_ANCESTORS=http://ehsodslp02.niehs.nih.gov
   revproxy-service:
     image: "quay.io/cdis/nginx:2021.03"
     container_name: revproxy-service
