@@ -1,19 +1,9 @@
 #!/bin/bash
 # Script to create and re-create es indices and setup guppy
 sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/study_etl_0
+docker exec esproxy-service curl -X DELETE http://localhost:9200/cebs_dataset_0
 sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/study_file_0
-sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/etl_0
-sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/file_0
-sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/file-array-config_0
-sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/study_file-array-config_0
-sleep 2
-docker exec esproxy-service curl -X DELETE http://localhost:9200/study_etl-array-config_0
+docker exec esproxy-service curl -X DELETE http://localhost:9200/cebs_dataset-array-config_0
 sleep 2
 docker exec tube-service bash -c "python run_config.py && python run_etl.py"
 
