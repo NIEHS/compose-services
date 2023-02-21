@@ -252,7 +252,7 @@ services:
     networks:
       - devnet
     environment:
-      - FRAME_ANCESTORS=http://ehsodslp02.niehs.nih.gov
+      - FRAME_ANCESTORS=http://gen3.niehs.nih.gov
   revproxy-service:
     image: "quay.io/cdis/nginx:2022.05"
     container_name: revproxy-service
@@ -320,18 +320,18 @@ services:
     environment:
       - HADOOP_URL=hdfs://0.0.0.0:9000
       - HADOOP_HOST=0.0.0.0
-  kibana-service:
-    image: quay.io/cdis/kibana-oss:6.5.4
-    container_name: kibana-service
-    environment:
-      - SERVER_NAME=kibana-service
-      - ELASTICSEARCH_URL=http://esproxy-service:9200
-    ports:
-      - 5601:5601
-    networks:
-      - devnet
-    depends_on:
-      - esproxy-service
+#  kibana-service:
+#    image: quay.io/cdis/kibana-oss:6.5.4
+#    container_name: kibana-service
+#    environment:
+#      - SERVER_NAME=kibana-service
+#      - ELASTICSEARCH_URL=http://esproxy-service:9200
+#    ports:
+#      - 5601:5601
+#    networks:
+#      - devnet
+#    depends_on:
+#      - esproxy-service
 networks:
   devnet:
 volumes:
