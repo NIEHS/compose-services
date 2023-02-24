@@ -216,7 +216,7 @@ services:
     #image: "michaelconway/data-portal:phase2"
     #image: "quay.io/cdis/data-portal:latest"
     container_name: portal-service
-    # command: tail -f /dev/null
+    #command: tail -f /dev/null
     command: ["bash", "/var/www/data-portal/waitForContainers.sh"]
     networks:
       - devnet
