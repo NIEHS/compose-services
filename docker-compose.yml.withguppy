@@ -109,7 +109,7 @@ services:
       - ./Secrets/TLS/service.crt:/usr/local/share/ca-certificates/cdis-ca.crt
       - ./scripts/peregrine_setup.sh:/peregrine_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs:/schemas_dir
+      - /var/althome/gen3/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
     environment: &env
       # DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
       PATH_TO_SCHEMA_DIR: /schemas_dir
@@ -135,7 +135,7 @@ services:
       - ./Secrets/config_helper.py:/var/www/sheepdog/config_helper.py
       - ./scripts/sheepdog_setup.sh:/sheepdog_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs:/schemas_dir
+      - /var/althome/gen3/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
     environment: *env
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]

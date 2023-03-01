@@ -109,7 +109,7 @@ services:
       - ./Secrets/TLS/service.crt:/usr/local/share/ca-certificates/cdis-ca.crt
       - ./scripts/peregrine_setup.sh:/peregrine_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs:/schemas_dir
+      - /var/althome/gen3/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
     environment: &env
       # DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
       PATH_TO_SCHEMA_DIR: /schemas_dir
@@ -135,7 +135,7 @@ services:
       - ./Secrets/config_helper.py:/var/www/sheepdog/config_helper.py
       - ./scripts/sheepdog_setup.sh:/sheepdog_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs:/schemas_dir
+      - /var/althome/gen3/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
     environment: *env
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]
@@ -150,7 +150,9 @@ services:
     networks:
       - devnet
     volumes:
+      #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - /var/althome/gen3/pcor_gen3_artifacts/custom_configs/guppy_config.json:/guppy/guppy_config.json
+      #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - ./scripts/wait_for_esproxy.sh:/usr/bin/wait_for_esproxy.sh:ro
     entrypoint: /usr/bin/wait_for_esproxy.sh
     command: node --max-http-header-size 16000 dist/server/server.js
@@ -318,18 +320,18 @@ services:
     environment:
       - HADOOP_URL=hdfs://0.0.0.0:9000
       - HADOOP_HOST=0.0.0.0
-#  kibana-service:
-#    image: quay.io/cdis/kibana-oss:6.5.4
-#    container_name: kibana-service
-#    environment:
-#      - SERVER_NAME=kibana-service
-#      - ELASTICSEARCH_URL=http://esproxy-service:9200
-#    ports:
-#      - 5601:5601
-#    networks:
-#      - devnet
-#    depends_on:
-#      - esproxy-service
+  kibana-service:
+    image: quay.io/cdis/kibana-oss:6.5.4
+    container_name: kibana-service
+    environment:
+      - SERVER_NAME=kibana-service
+      - ELASTICSEARCH_URL=http://esproxy-service:9200
+    ports:
+      - 5601:5601
+    networks:
+      - devnet
+    depends_on:
+      - esproxy-service
 networks:
   devnet:
 volumes:
