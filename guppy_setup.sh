@@ -7,6 +7,8 @@ docker exec esproxy-service curl -X DELETE http://localhost:9200/population_data
 sleep 2
 docker exec esproxy-service curl -X DELETE http://localhost:9200/geospatial_data_resource_0
 sleep 2
+docker exec esproxy-service curl -X DELETE http://localhost:9200/geospatial_tool_resource_0
+sleep 2
 docker exec esproxy-service curl -X DELETE http://localhost:9200/study_file_0
 sleep 2
 docker exec esproxy-service curl -X DELETE http://localhost:9200/etl_0
