@@ -12,3 +12,4 @@ Secrets/
 *pyc
 docker-compose.override.yml
 docker-compose-local.yml
+docker-compose-deep.yml
