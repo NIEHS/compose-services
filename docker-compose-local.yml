@@ -109,7 +109,7 @@ services:
       - ./Secrets/TLS/service.crt:/usr/local/share/ca-certificates/cdis-ca.crt
       - ./scripts/peregrine_setup.sh:/peregrine_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
     environment: &env
       # DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json
       PATH_TO_SCHEMA_DIR: /schemas_dir
@@ -135,7 +135,7 @@ services:
       - ./Secrets/config_helper.py:/var/www/sheepdog/config_helper.py
       - ./scripts/sheepdog_setup.sh:/sheepdog_setup.sh
       #- ./datadictionary/gdcdictionary/schemas:/schemas_dir
-      - /var/althome/gen3/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/schema/gdcdictionary/schemas:/schemas_dir
     environment: *env
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]
@@ -151,7 +151,7 @@ services:
       - devnet
     volumes:
       #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs/guppy_config.json:/guppy/guppy_config.json
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/custom_configs/guppy_config.json:/guppy/guppy_config.json
       #- ./Secrets/guppy_config.json:/guppy/guppy_config.json
       - ./scripts/wait_for_esproxy.sh:/usr/bin/wait_for_esproxy.sh:ro
     entrypoint: /usr/bin/wait_for_esproxy.sh
@@ -222,7 +222,7 @@ services:
       - devnet
     volumes:
       - ./scripts/waitForContainers.sh:/var/www/data-portal/waitForContainers.sh
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs/gitops.json:/data-portal/data/config/gitops.json
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/custom_configs/gitops.json:/data-portal/data/config/gitops.json
       # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
       - ./Secrets/gitops-logo.png:/data-portal/custom/logo/gitops-logo.png
       - ./Secrets/gitops.png:/data-portal/custom/createdby/gitops.png
@@ -281,8 +281,10 @@ services:
   tube-service:
     #image: "quay.io/cdis/tube:2020.09"
     #image: "michaelconway/tube:latest"
-    image: "michaelconway/tube:phase2"
-    #image: "quay.io/cdis/tube:2021.03"
+    #image: "michaelconway/tube:phase2"
+    #image: "michaelconway/tube:2023.02"
+    image "pateldes/tube:2023.02"
+    #image: "quay.io/cdis/tube:2023.02"
     container_name: tube-service
     command: bash -c "while true; do sleep 5; done"
     networks:
@@ -297,9 +299,9 @@ services:
     volumes:
       - ./Secrets/etl_creds.json:/usr/share/gen3/tube/creds.json
       #- ./Secrets/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/custom_configs/etlMapping.yaml:/usr/share/gen3/tube/etlMapping.yaml
       - ./Secrets/user.yaml:/usr/share/gen3/tube/user.yaml
-      - /var/althome/gen3/pcor_gen3_artifacts/custom_configs/:/usr/share/gen3/custom
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/custom_configs/:/usr/share/gen3/custom
 
     depends_on:
       - postgres
