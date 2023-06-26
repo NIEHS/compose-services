@@ -192,9 +192,12 @@ services:
       nofile:
         soft: 65536
         hard: 65536
-    ports:
-      - 9200:9200
-      - 9300:9300
+#    ports:
+#      - 9200:9200
+#      - 9300:9300
+    expose:
+       - 9200
+       - 9300 
     networks:
       - devnet
   pidgin-service:
@@ -264,7 +267,7 @@ services:
       - ./Secrets/TLS/service.crt:/etc/nginx/ssl/nginx.crt
       - ./Secrets/TLS/service.key:/etc/nginx/ssl/nginx.key
     ports:
-      - "80:80"
+      #- "80:80"
       - "443:443"
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost/_status"]
@@ -329,8 +332,10 @@ services:
     environment:
       - SERVER_NAME=kibana-service
       - ELASTICSEARCH_URL=http://esproxy-service:9200
-    ports:
-      - 5601:5601
+    #ports:
+    #  - 5601:5601
+    expose:
+       - 5601
     networks:
       - devnet
     depends_on:
