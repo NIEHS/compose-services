@@ -226,6 +226,7 @@ services:
       # - ./Secrets/gitops.json:/data-portal/data/config/gitops.json
       - ./Secrets/gitops-logo.png:/data-portal/custom/logo/gitops-logo.png
       - ./Secrets/gitops.png:/data-portal/custom/createdby/gitops.png
+      - /Users/conwaymc/Documents/workspace-pcor/pcor_gen3_artifacts/custom_configs/gitops.css:/data-portal/custom/css/gitops.css
     environment:
       - NODE_ENV=dev
       #- MOCK_STORE=true
