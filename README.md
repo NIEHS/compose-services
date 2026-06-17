@@ -1,6 +1,14 @@
 Compose-Services
 ===
 
+
+
+This repository has been archived and is no longer maintained.
+The code is provided for historical reference and may contain unpatched or unknown vulnerabilities.
+It should not be used in production systems.
+
+
+
 Docker-compose setup for experimental commons, small commons, or local development of the Gen3 stack. Production use should use [cloud-automation](https://github.com/uc-cdis/cloud-automation).
 
 This setup uses Docker containers for the [Gen3 microservices](https://github.com/uc-cdis/) and nginx. The microservices and nginx images are pulled from quay.io (master), while Postgres (9.5) images are pulled from Docker Hub. Nginx is used as a reverse proxy to each of the services. 
